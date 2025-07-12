@@ -1,0 +1,88 @@
+@use 'data' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=WDXL+Lubrifont+SC&display=swap');
+
+h1 {
+  font: {
+    family: $fnt-Int;
+    weight: 800;
+    size: 6rem;
+  }
+}
+
+h2 {
+  font: {
+    family: $fnt-Int;
+    weight: 600;
+    size: 4rem;
+  }
+}
+
+h3 {
+  font: {
+    family: $fnt-Int;
+    weight: 500;
+    size: 3rem;
+  }
+}
+
+h4 {
+  font: {
+    family: $fnt-Rob;
+    weight: 500;
+    size: 1.5rem;
+  }
+}
+
+h5 {
+  font: {
+    family: $fnt-Int;
+    weight: 400;
+    size: 1rem;
+  }
+  color: gray;
+}
+
+h6 {
+  font: {
+    family: $fnt-Int;
+    weight: 500;
+    size: 0.8rem;
+  }
+  color: $text-ref;
+}
+
+label {
+  font: {
+    family: $fnt-Int;
+    size: 1rem;
+    weight: 400;
+  }
+}
+
+textarea,
+input {
+  font: {
+    family: $fnt-Int;
+    size: 1rem;
+    weight: 400;
+  }
+}
+
+p {
+  font: {
+    family: $fnt-Rob;
+    size: 1rem;
+    weight: 400;
+  }
+}
+
+a {
+  font: {
+    family: $fnt-Int;
+    weight: 600;
+    size: 1rem;
+  }
+  color: $text-ref;
+}

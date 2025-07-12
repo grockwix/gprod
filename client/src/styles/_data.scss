@@ -1,0 +1,87 @@
+// main
+$main-bg-col: rgb(20, 20, 20) !default;
+$header-col: hsl(0, 0%, 16%) !default;
+$head-elem_col: rgb(230, 230, 230);
+$li-color: hsl(0, 0%, 16%);
+$lines: hsl(40, 100%, 85%) !default;
+$text-col-lght: hsl(0, 0%, 94%) !default;
+$text-col-drk: rgb(35, 35, 35) !default;
+
+// borders
+$bord-rad: 15px;
+$bord-elem: 20px;
+
+// button
+$btn-sndmail-col: hsl(45, 100%, 55%);
+$btn-sndmail-hover: hsl(45, 100%, 45%);
+$btn-sndmail-disabled: hsl(0, 0%, 40%);
+
+// canvas
+$canvas-col: hsl(280, 100%, 72%) !default;
+$canvas-glow: linear-gradient(
+  90deg,
+  hsl(0, 100%, 100%),
+  $canvas-col,
+  hsl(195, 100%, 80%),
+  hsl(80, 100%, 80%),
+  hsl(50, 100%, 80%),
+  hsl(0, 100%, 100%)
+) !default;
+
+// isvalid
+$isvalid-col: hsl(15, 100%, 60%);
+$isvalid-bg-col: hsl(0, 0%, 90%);
+$isvalid-border: hsl(0, 0%, 80%);
+
+// feedback
+$fb-bg-col: hsla(0, 0%, 15%, 1);
+$fb-bg-glow: hsl(187, 100%, 80%);
+$fb-border-col: hsla(0, 0%, 60%, 0.5);
+$fb-field-bg-col: hsl(0, 0%, 90%);
+$fb-field-border: 2px solid;
+$fb-field-border-radius: 2rem;
+$fb-field-border-col: hsl(0, 0%, 80%);
+$fb-field-focus-col: hsl(45, 100%, 60%);
+$fb-notif-bg-succ: hsl(90, 100%, 80%);
+$fb-notif-col-succ: hsl(90, 100%, 35%);
+$fb-notif-bg-wait: hsl(45, 100%, 80%);
+$fb-notif-col-wait: hsl(45, 100%, 35%);
+$fb-notif-bg-err: hsl(15, 100%, 80%);
+
+// fonts
+$fnt-Int: 'Inter' !default;
+$fnt-Rob: 'Roboto' !default;
+$fnt-WDX: 'WDXL Lubrifont SC' !default;
+
+// loading
+$load-in-col: hsl(0, 0%, 100%);
+$load-out-col: hsla(0, 0%, 60%, 0.5);
+
+// footer
+$ref-und-lines: hsl(80, 100%, 60%);
+$text-ref: rgb(150, 150, 150);
+
+// progressbar
+$progressbar-col: linear-gradient(90deg, #ffa500, #ffd700) !default;
+$progressbar-fill: rgba(120, 120, 120, 0.3) !default;
+
+// outlines
+$lines-main: 1rem solid red;
+$lines-second: 0.3rem solid rgb(0, 255, 213);
+
+// sections
+$sec-1: rgb(25, 25, 25) !default;
+$sec-2: rgb(35, 35, 35) !default;
+$sec-3: rgb(20, 20, 20) !default;
+$sec-4: rgb(30, 30, 30) !default;
+
+// transitions
+$time-nav-menu: 500ms;
+$time-logo: 500ms;
+$time-li: 300ms;
+$time-ref: 300ms;
+$time-isvalid: 300ms;
+
+// video
+$video-bord-rad: 15px;
+$video-h: 18rem;

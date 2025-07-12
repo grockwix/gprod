@@ -1,0 +1,279 @@
+@use 'data' as *;
+
+.feedback {
+  $field-w: 30rem;
+
+  position: relative;
+
+  grid-column: 2/3;
+
+  min-width: 30rem;
+  padding: 3rem;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, auto);
+  justify-items: center;
+  align-items: center;
+
+  border-radius: 1rem;
+  outline: 2px solid $fb-border-col;
+
+  background-color: $fb-bg-col;
+
+  &::after,
+  &::before {
+    position: absolute;
+
+    content: '';
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    border-radius: 1rem;
+  }
+
+  &::before {
+    opacity: 0.1;
+    filter: blur(2rem);
+
+    background-color: $fb-bg-glow;
+  }
+
+  .line-split {
+    grid-column: 1/5;
+
+    margin: 1rem;
+    width: 100%;
+
+    border-bottom: 1px solid $fb-border-col;
+  }
+
+  // Уведомление об отправке письма (SendData)
+  .notification {
+    grid-column: 1/5;
+
+    margin: {
+      bottom: 1rem;
+    }
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 1rem;
+
+    .icon {
+      max-height: 2rem;
+    }
+    p {
+      width: 18rem;
+
+      white-space: pre-wrap;
+      text-align: center;
+    }
+
+    &.success {
+      border: $fb-field-border $fb-notif-col-succ;
+
+      color: $fb-notif-col-succ;
+      background-color: $fb-notif-bg-succ;
+    }
+
+    &.wait {
+      border: $fb-field-border $fb-notif-col-wait;
+
+      color: $fb-notif-col-wait;
+      background-color: $fb-notif-bg-wait;
+    }
+
+    &.error {
+      border: $fb-field-border hsl(15, 100%, 70%);
+
+      color: $isvalid-col;
+      background-color: $fb-notif-bg-err;
+    }
+  }
+
+  // Кнопка отправки формы
+  .sendmail {
+    grid-column: 1/5;
+
+    padding: {
+      left: 3rem;
+      right: 3rem;
+      top: 1rem;
+      bottom: 1rem;
+    }
+
+    border-radius: 3rem;
+    border: none;
+
+    cursor: pointer;
+    color: $text-col-lght;
+    background-color: $btn-sndmail-col;
+
+    .sendmail_in {
+      width: 8rem;
+      height: 2rem;
+
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      justify-items: stretch;
+      align-items: center;
+
+      p {
+        width: 5rem;
+
+        font: {
+          weight: 500;
+        }
+
+        white-space: pre-wrap;
+        text-align: start;
+      }
+
+      .mail {
+        fill: $text-col-lght;
+        width: 2rem;
+        height: 2rem;
+      }
+
+      .loader_out {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+
+    &:hover {
+      background-color: $btn-sndmail-hover;
+    }
+
+    &:disabled {
+      background-color: $btn-sndmail-disabled;
+    }
+  }
+
+  // Контейнеры полей
+  .fieldwrap {
+    grid-column: 1/5;
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    // border: 1px solid white;
+
+    .labelfield {
+      margin: {
+        left: 2rem;
+        right: 2rem;
+        top: 0.5rem;
+        bottom: 0.5rem;
+      }
+
+      font: {
+        size: 1.1rem;
+        weight: 500;
+      }
+
+      color: $text-col-lght;
+    }
+
+    .field {
+      border-radius: 2rem;
+
+      border: none;
+    }
+
+    .fieldarea {
+      max-height: calc(4rem * 6);
+
+      border-radius: 1rem;
+
+      scrollbar-width: none;
+      resize: none;
+      border: none;
+    }
+
+    // Общие свойства полей
+    .field,
+    .fieldarea {
+      padding: {
+        left: 2rem;
+        right: 2rem;
+        top: 1rem;
+        bottom: 1rem;
+      }
+
+      width: $field-w;
+      height: auto;
+
+      font: {
+        size: 1.2rem;
+        weight: 500;
+      }
+
+      outline-offset: -1px;
+
+      color: $text-col-drk;
+      background-color: $fb-field-bg-col;
+
+      &.error {
+        outline: $fb-field-border $isvalid-col;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:focus {
+        cursor: text;
+        outline: $fb-field-border $fb-field-focus-col;
+      }
+    }
+
+    // Сообщения об ошибке
+    .isvaild,
+    .isvaild.view {
+      margin: {
+        left: 2rem;
+        right: 1rem;
+        top: 0.5rem;
+        bottom: 0.5rem;
+      }
+      padding: {
+        left: 1rem;
+        right: 1rem;
+        top: 0.5rem;
+        bottom: 0.5rem;
+      }
+
+      max-width: calc($field-w - 3rem);
+
+      white-space: pre-wrap;
+      text-align: start;
+
+      border-radius: 1rem;
+      border: 2px solid $isvalid-border;
+
+      color: $isvalid-col;
+      background-color: $isvalid-bg-col;
+
+      transition-duration: $time-isvalid;
+    }
+
+    // Появление ошибки isvalid
+    .isvaild {
+      opacity: 0%;
+      scale: 0;
+
+      &.view {
+        opacity: 100%;
+        scale: 1;
+      }
+    }
+  }
+}

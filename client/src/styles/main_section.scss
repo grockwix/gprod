@@ -1,6 +1,7 @@
 @use 'data' as *;
 @use 'width_scroll';
 @use 'feedback';
+@use 'works_example';
 
 .main_section {
   display: flex;
@@ -165,36 +166,15 @@
 
   .section_3 {
     padding: 5rem;
-    // flex: 1 2 auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
     z-index: 1;
 
     background-color: $sec-3;
-
-    .works_example {
-      display: grid;
-      grid-template-columns: repeat(2, auto);
-      justify-content: center;
-      justify-items: center;
-      gap: 2rem 2rem;
-
-      .first {
-        height: 37rem;
-        grid-column: 1/3;
-      }
-
-      a {
-        height: $video-h;
-        box-shadow: 0 0 2rem rgb(0, 0, 0);
-
-        border-radius: $video-bord-rad;
-
-        video {
-          height: $video-h;
-
-          border-radius: $video-bord-rad;
-        }
-      }
-    }
   }
 
   .section_4 {

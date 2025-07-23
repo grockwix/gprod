@@ -1,6 +1,6 @@
 @use 'data' as *;
 
-.width_scroll {
+.WidthScroll {
   padding: {
     top: 1rem;
     bottom: 1rem;
@@ -67,19 +67,19 @@
       }
     }
   }
-  .scroll_in[direction='right'] {
+  .scroll_in[data-direction='right'] {
     animation-direction: reverse;
-  }
-}
-
-@media all and (min-height: 1000px) {
-  .width_scroll {
-    max-width: 100rem;
   }
 }
 
 @keyframes scroll {
   to {
     transform: translateX(calc(-50% - 0.5rem));
+  }
+}
+
+@media all and (min-height: 1000px) {
+  .width_scroll {
+    max-width: 100rem;
   }
 }

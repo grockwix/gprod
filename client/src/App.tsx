@@ -1,6 +1,7 @@
-import { ProgressBar } from './components/ProgressBar.jsx'
-import { Works_example } from './components/Works_example.jsx'
-import { Feedback } from './components/Feedback.jsx'
+import { ProgressBar } from './components/ProgressBar'
+import { WidthScroll } from './components/WidthScroll.tsx'
+import { WorksExample } from './components/WorksExample.tsx'
+import { Feedback } from './components/Feedback.tsx'
 
 function Header() {
   return (
@@ -45,12 +46,12 @@ function Main_sec() {
       <div className='section_2_wrapper'>
         <div className='section_2'>
           <h2>Бренды для примера</h2>
-          <Width_Scroll />
-          <Width_Scroll direction='right' />
+          <WidthScroll />
+          <WidthScroll direction='right' />
         </div>
       </div>
       <div id='Examples' className='section_3'>
-        <Works_example />
+        <WorksExample />
       </div>
       <div id='Feedback' className='section_4'>
         <h3>Обратная связь</h3>
@@ -63,41 +64,8 @@ function Main_sec() {
 function Main() {
   return (
     <main>
-      {/* <SideBar /> */}
       <Main_sec />
     </main>
-  )
-}
-
-function Width_Scroll({ direction }) {
-  const imgs = [
-    './assets/w_scroll/sber.png',
-    './assets/w_scroll/alfa-bank.png',
-    './assets/w_scroll/t-bank.png',
-    './assets/w_scroll/yandex.png',
-    './assets/w_scroll/X5Group.svg',
-    './assets/w_scroll/wb.png',
-  ]
-  const renderlist = imgs.map(elem => (
-    <li key={imgs.indexOf(elem)}>
-      <img src={elem} alt='Нет логотипа' />
-    </li>
-  ))
-  return (
-    <div className='width_scroll'>
-      <ul className='scroll_in' direction={direction}>
-        {renderlist}
-        {renderlist}
-      </ul>
-    </div>
-  )
-}
-
-function SideBar() {
-  return (
-    <aside>
-      <div>Сайдбар</div>
-    </aside>
   )
 }
 

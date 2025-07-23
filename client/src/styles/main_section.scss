@@ -1,7 +1,7 @@
 @use 'data' as *;
-@use 'width_scroll';
+@use 'WidthScroll';
+@use 'WorksExample';
 @use 'feedback';
-@use 'works_example';
 
 .main_section {
   display: flex;

@@ -1,6 +1,6 @@
 @use 'data' as *;
 
-.works_example {
+.WorksExample {
   padding: 3rem;
 
   display: grid;
@@ -10,7 +10,6 @@
   gap: 2rem 2rem;
 
   border-radius: 2rem;
-  outline: 1px solid hsla(0, 0%, 70%, 0.5);
 
   .video_link {
     height: $video-h;

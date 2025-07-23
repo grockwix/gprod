@@ -1,4 +1,8 @@
-function SvgMail({ className }) {
+type TclassName = {
+  className: string
+}
+
+function SvgMail({ className }: TclassName) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -11,7 +15,7 @@ function SvgMail({ className }) {
     </svg>
   )
 }
-function SvgCheck({ className }) {
+function SvgCheck({ className }: TclassName) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -27,7 +31,7 @@ function SvgCheck({ className }) {
     </svg>
   )
 }
-function SvgWarning({ className }) {
+function SvgWarning({ className }: TclassName) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -43,7 +47,7 @@ function SvgWarning({ className }) {
     </svg>
   )
 }
-function SvgError({ className }) {
+function SvgError({ className }: TclassName) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'

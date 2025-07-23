@@ -1,3 +1,10 @@
+type TPatterns = {
+  name: RegExp
+  email: RegExp
+  msg: RegExp
+  symbol: RegExp
+}
+
 export const config = {
   patterns: {
     name: new RegExp('^[a-zA-Zа-яА-ЯёЁ0-9-]{2,16}$'),

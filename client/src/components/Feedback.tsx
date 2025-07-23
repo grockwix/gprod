@@ -1,7 +1,16 @@
 import { useEffect, useState, useRef } from 'react'
 import { SvgCheck, SvgError, SvgMail, SvgWarning } from './Icons'
 import { config } from '../config/feedback.config'
-import axios from 'axios'
+import axios, { isAxiosError } from 'axios'
+import type { FC, FormEvent, ChangeEvent } from 'react'
+import type {
+  TBtnSendMail,
+  TNotification,
+  TInputField,
+  Tdata,
+  TValidData,
+  TSendData,
+} from '../types/Feedback'
 
 const URL_SERVER = import.meta.env.VITE_URL_SERVER
 
@@ -11,17 +20,17 @@ function Feedback() {
   const inittimer = 30
   const delay = 30000
 
-  const [data, setdata] = useState(initdata)
+  const [data, setdata] = useState<Tdata>(initdata)
   const [isValid, setisValid] = useState(true)
   const [isLoading, setisLoading] = useState(false)
 
   const [notif, setnotif] = useState(initnotif)
-  const [timer, settimer] = useState(inittimer)
+  const [timer, settimer] = useState<number>(inittimer)
   const [isResend, setisResend] = useState(true)
-  const refInter = useRef(null)
-  const refTimer = useRef(null)
+  const refInter = useRef<number>(null)
+  const refTimer = useRef<number>(null)
 
-  const valid_data = ValidField(data)
+  const validData = ValidField(data)
 
   // Таймер отправки
   useEffect(() => {
@@ -38,23 +47,28 @@ function Feedback() {
     }, 1000)
 
     refTimer.current = setTimeout(() => {
-      clearInterval(refInter.current)
-      Initial()
+      if (refInter.current) {
+        clearInterval(refInter.current)
+        Initial()
+      }
     }, delay + 1000)
 
     return () => {
-      clearTimeout(refTimer.current)
-      Initial()
+      if (refInter.current && refTimer.current) {
+        clearTimeout(refTimer.current)
+        clearInterval(refInter.current)
+        Initial()
+      }
     }
   }, [isResend])
 
-  function onChangeHandler(e) {
+  function onChangeHandler(e: ChangeEvent<HTMLFormElement>) {
     const name = e.target.name
     const value = e.target.value
     setdata(res => ({ ...res, [name]: value }))
   }
 
-  async function onSubmitHandler(e) {
+  async function onSubmitHandler(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
     // Проверка на повторную отправку
@@ -64,7 +78,7 @@ function Feedback() {
     }
 
     // Отправка данных
-    if (valid_data.sum.value) {
+    if (validData.sum.value) {
       setisValid(true)
       setisLoading(true)
       const result = await SendData(data)
@@ -92,20 +106,21 @@ function Feedback() {
         type='text'
         label='Имя'
         placeholder='Введите имя'
-        data_valid={!isValid && valid_data.name}
+        data_valid={!isValid && validData.name}
       />
       <InputField
         name='email'
         type='text'
         label='Почта'
         placeholder='Пример: example@mail.ru'
-        data_valid={!isValid && valid_data.email}
+        data_valid={!isValid && validData.email}
       />
       <InputField
         name='msg'
+        type='text'
         label='Сообщение'
         placeholder='Укажите подробности'
-        data_valid={!isValid && valid_data.msg}
+        data_valid={!isValid && validData.msg}
       />
       <span className='line-split'></span>
       <Notification notif={notif} timer={timer} />
@@ -124,7 +139,7 @@ function LoadingBar() {
 }
 
 // Настройка кнопки
-function BtnSendMail({ disabled }) {
+function BtnSendMail({ disabled }: TBtnSendMail) {
   return (
     <>
       <button className='sendmail' type='submit' disabled={disabled}>
@@ -147,7 +162,7 @@ function BtnSendMail({ disabled }) {
 }
 
 // Уведомления об отправки формы
-function Notification({ notif, timer }) {
+function Notification({ notif, timer }: TNotification) {
   return (
     <>
       {notif.msg != '' && (
@@ -176,25 +191,35 @@ function Notification({ notif, timer }) {
   )
 }
 
-function InputField({ name, type, label, placeholder, data_valid }) {
-  let swap_input
-  let isError = data_valid.value === false ? true : false
+const InputField: FC<TInputField> = ({
+  name,
+  type,
+  label,
+  placeholder,
+  data_valid,
+}) => {
+  const isError = data_valid && !data_valid.value
+  const description = data_valid && data_valid.description
+  const refField = useRef<HTMLTextAreaElement>(null)
 
-  const refField = useRef(null)
+  let swap_input
 
   // Адаптивный размер поля msg
   useEffect(() => {
     const autoresize = refField.current
+    if (!autoresize) return
 
     function AutoResizeHandler() {
+      if (!autoresize) return
+
       autoresize.style.height = 'auto'
       const scrollH = autoresize.scrollHeight
       autoresize.style.height = `${scrollH / 16}rem`
     }
 
-    if (autoresize) {
+    autoresize.addEventListener('input', AutoResizeHandler)
+    return () => {
       autoresize.addEventListener('input', AutoResizeHandler)
-      return autoresize.addEventListener('input', AutoResizeHandler)
     }
   }, [])
 
@@ -228,22 +253,21 @@ function InputField({ name, type, label, placeholder, data_valid }) {
           {label}
         </label>
         {swap_input}
-        <p className={`isvaild ${isError && 'view'}`}>
-          {data_valid.description}
-        </p>
+        <p className={`isvaild ${isError && 'view'}`}>{description}</p>
       </div>
     </>
   )
 }
 
-// Возвращает ValidData в JSON формате
-function ValidField(data) {
+// Проверяет введенные поля на валидность
+// и возвращает результат в виде объекта (ValidData)
+function ValidField(data: Tdata): TValidData {
   const valids = config.valids
   const patterns = config.patterns
-  const keys_data = Object.keys(data)
+  const keys_data: string[] = Object.keys(data)
 
   let count_valid = 0
-  let ValidData = {
+  const validData: TValidData = {
     name: {
       value: patterns.name.test(data.name),
       description: '',
@@ -262,55 +286,58 @@ function ValidField(data) {
     },
   }
 
-  for (let key of keys_data) {
+  for (const key of keys_data) {
     switch (key) {
       case 'name':
-        if (ValidData[key].value) {
+        if (validData[key].value) {
           count_valid++
         } else if (data[key] === '') {
-          ValidData[key].description = valids.required
+          validData[key].description = valids.required
         } else if (patterns.symbol.test(data[key])) {
-          ValidData[key].description = `${valids.symbol}: ${data[key].match(
+          validData[key].description = `${valids.symbol}: ${data[key].match(
             patterns.symbol
           )}`
-        } else ValidData[key].description = valids.l_name
+        } else validData[key].description = valids.l_name
         break
       case 'email':
-        if (ValidData[key].value) {
+        if (validData[key].value) {
           count_valid++
         } else if (data[key] === '') {
-          ValidData[key].description = valids.required
-        } else ValidData[key].description = valids.email
+          validData[key].description = valids.required
+        } else validData[key].description = valids.email
         break
       case 'msg':
-        if (ValidData[key].value) {
+        if (validData[key].value) {
           count_valid++
         } else if (data[key] === '') {
-          ValidData[key].description = valids.required
-        } else ValidData[key].description = valids.l_msg
+          validData[key].description = valids.required
+        } else validData[key].description = valids.l_msg
         break
       default:
-        return ValidData
+        break
     }
   }
 
   if (count_valid === 3) {
-    ValidData.sum.value = true
+    validData.sum.value = true
   }
 
-  return ValidData
+  return validData
 }
 
-// Отправка данных на сервер
-async function SendData(data) {
+// Отправляет валидные данные на сервер
+// и возвращает ответ в виде объекта
+async function SendData(data: Tdata): Promise<TSendData> {
   let response = ''
-  let result = {}
+  let result = { status: '', msg: '' }
 
   try {
-    const responce = await axios.post(URL_SERVER, data)
-    response = responce.statusText
+    const send = await axios.post(URL_SERVER, data)
+    response = send.statusText
   } catch (error) {
-    response = error.code
+    if (isAxiosError(error)) {
+      response = error.code || 'UNKNOWN_ERROR'
+    }
   }
 
   switch (response) {
@@ -321,7 +348,7 @@ async function SendData(data) {
       result = { status: 'error', msg: 'Ошибка отправки на сервер' }
       break
     default:
-      result = { status: '', msg: '' }
+      result = { status: 'error', msg: 'Неизвестная ошибка' }
       break
   }
 

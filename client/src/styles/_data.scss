@@ -4,8 +4,9 @@ $header-col: hsl(0, 0%, 16%) !default;
 $head-elem_col: rgb(230, 230, 230);
 $li-color: hsl(0, 0%, 16%);
 $lines: hsl(40, 100%, 85%) !default;
+$placeholder: hsl(0, 0%, 50%) !default;
 $text-col-lght: hsl(0, 0%, 94%) !default;
-$text-col-drk: rgb(35, 35, 35) !default;
+$text-col-drk: hsl(0, 0%, 15%) !default;
 
 // borders
 $bord-rad: 15px;
@@ -15,13 +16,19 @@ $bord-elem: 20px;
 $btn-sndmail-col: hsl(45, 100%, 55%);
 $btn-sndmail-hover: hsl(45, 100%, 45%);
 $btn-sndmail-disabled: hsl(0, 0%, 40%);
+$btn-contact-col: hsl(13, 100%, 50%);
+$btn-contact-hover: hsl(13, 100%, 45%);
 
 // canvas
-$canvas-col: hsl(280, 100%, 72%) !default;
+$canvas-col: linear-gradient(
+  180deg,
+  hsl(280, 100%, 72%),
+  hsl(280, 100%, 50%)
+) !default;
 $canvas-glow: linear-gradient(
   90deg,
   hsl(0, 100%, 100%),
-  $canvas-col,
+  hsl(280, 100%, 72%),
   hsl(195, 100%, 80%),
   hsl(80, 100%, 80%),
   hsl(50, 100%, 80%),
@@ -42,6 +49,9 @@ $fb-field-border: 2px solid;
 $fb-field-border-radius: 2rem;
 $fb-field-border-col: hsl(0, 0%, 80%);
 $fb-field-focus-col: hsl(45, 100%, 60%);
+$fb-field-btnclear-col: transparent;
+$fb-field-btnclear-hover: hsla(0, 0%, 15%, 0.1);
+$fb-field-iconclear-col: $placeholder;
 $fb-notif-bg-succ: hsl(90, 100%, 80%);
 $fb-notif-col-succ: hsl(90, 100%, 35%);
 $fb-notif-bg-wait: hsl(45, 100%, 80%);
@@ -81,6 +91,7 @@ $time-logo: 500ms;
 $time-li: 300ms;
 $time-ref: 300ms;
 $time-isvalid: 300ms;
+$time-btn: 300ms;
 
 // video
 $video-bord-rad: 2rem;

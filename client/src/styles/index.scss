@@ -36,21 +36,6 @@ main {
 
   // background-color: $main-bg-col;
   // outline: $lines-main;
-
-  aside {
-    height: 90vh;
-    width: 200px;
-    margin: 0.3rem 0 0.3rem 0;
-
-    top: 90px;
-    position: sticky;
-    z-index: 1;
-
-    border-radius: 0 $bord-rad $bord-rad 0;
-
-    outline: 2px solid red;
-    background-color: $header-col;
-  }
 }
 
 footer {
@@ -84,10 +69,9 @@ footer {
 
   nav {
     display: grid;
-    grid-template-rows: repeat(2, 2.5rem);
-    grid-template-columns: repeat(3, 8rem);
-    justify-items: center;
     align-items: center;
+    justify-items: center;
+    gap: 1rem 1rem;
 
     h4 {
       grid-column: 1/4;
@@ -98,40 +82,59 @@ footer {
       grid-column: 1/4;
     }
 
-    a {
+    .link {
       position: relative;
 
-      text-decoration: none;
-
-      transition-duration: $time-ref;
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 0.5rem;
 
       color: $text-ref;
 
-      font: {
-        family: 'Inter';
-        weight: 600;
-        size: 1rem;
+      transition-duration: $time-ref;
+
+      .icon {
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+
+      p {
+        align-content: end;
+
+        font: {
+          family: 'Inter';
+          weight: 600;
+          size: 1rem;
+        }
+      }
+
+      // Эффект подчеркивания
+      &::before {
+        position: absolute;
+
+        margin-top: 1.8rem;
+        left: 0;
+
+        content: ' ';
+        width: 0%;
+        height: 2px;
+
+        background-color: $ref-und-lines;
+
+        transition-duration: $time-ref;
+      }
+
+      // Появление эффекта
+      &:hover::before {
+        width: 100%;
+      }
+
+      &:nth-child(5) {
+        grid-column: 2/3;
       }
 
       &:hover {
         color: $text-col-lght;
-      }
-
-      &::before {
-        content: ' ';
-        position: absolute;
-        width: 0%;
-        height: 4px;
-        left: 0;
-        margin-top: 1.5rem;
-
-        transition-duration: $time-ref;
-
-        background-color: $ref-und-lines;
-      }
-
-      &:hover::before {
-        width: 100%;
       }
     }
   }
@@ -163,12 +166,6 @@ footer {
       border-radius: 50%;
 
       animation: rotate 800ms linear infinite;
-    }
-  }
-
-  @keyframes rotate {
-    100% {
-      transform: rotate(360deg);
     }
   }
 }

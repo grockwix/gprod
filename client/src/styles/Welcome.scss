@@ -1,0 +1,138 @@
+@use 'data' as *;
+
+.Welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  transform: translateY(7rem);
+
+  h1 {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    span {
+      font: {
+        size: 5rem;
+        weight: 100;
+      }
+    }
+  }
+
+  .contact {
+    margin: 1rem;
+
+    width: 12rem;
+    height: 4rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+
+    font: {
+      weight: 500;
+      size: 1.1rem;
+    }
+
+    border-radius: 2rem;
+
+    color: $text-col-lght;
+    background-color: $btn-contact-col;
+
+    transition-duration: $time-btn;
+
+    &:hover {
+      background-color: $btn-contact-hover;
+    }
+  }
+
+  .canvas {
+    position: relative;
+
+    width: 63rem;
+    height: 30rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 20px;
+
+    background: $canvas-col;
+
+    &::after,
+    &::before {
+      position: absolute;
+      z-index: -1;
+
+      content: '';
+      height: 100%;
+      width: 100%;
+
+      padding: 1px;
+
+      border-radius: 21px;
+
+      background: $canvas-glow;
+      background-size: 600%;
+
+      animation: glow 30s linear infinite;
+    }
+
+    &::before {
+      opacity: 0.4;
+      filter: blur(2rem);
+    }
+    &::after {
+      mask: linear-gradient(
+        90deg,
+        transparent,
+        white 30%,
+        white 70%,
+        transparent
+      );
+    }
+
+    .rub {
+      position: absolute;
+      z-index: 1;
+
+      transform: translateY(-5rem);
+    }
+
+    // Маска для линии
+    span {
+      position: relative;
+
+      width: 63rem;
+      height: 30rem;
+
+      display: flex;
+      justify-content: center;
+
+      overflow: hidden;
+
+      .line {
+        position: absolute;
+
+        transform: translate(1rem, 2rem);
+      }
+    }
+  }
+}
+
+@keyframes glow {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}

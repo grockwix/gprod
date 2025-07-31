@@ -1,4 +1,5 @@
 @use 'data' as *;
+@use 'Welcome';
 @use 'WidthScroll';
 @use 'WorksExample';
 @use 'feedback';
@@ -15,111 +16,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     flex: 0 1 auto;
     z-index: 2;
 
     background-color: $sec-1;
-
-    h1 {
-      width: 70rem;
-
-      display: block;
-      text-align: center;
-      text-wrap: wrap;
-
-      transform: translateY(4rem);
-
-      span {
-        font-size: 5rem;
-        font-weight: 100;
-      }
-    }
-
-    .welcome {
-      position: relative;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-
-      transform: translateY(7rem);
-
-      .rub {
-        position: absolute;
-        z-index: 1;
-
-        transform: translateY(-5rem);
-      }
-
-      .canvas {
-        position: relative;
-
-        width: 63rem;
-        height: 30rem;
-
-        display: flex;
-        justify-content: center;
-
-        background-color: $canvas-col;
-        border-radius: 20px;
-
-        &::after,
-        &::before {
-          position: absolute;
-          z-index: -1;
-
-          content: '';
-          height: 100%;
-          width: 100%;
-
-          padding: 1px;
-
-          border-radius: 21px;
-
-          transition-duration: 500ms;
-
-          background: $canvas-glow;
-          background-size: 600%;
-
-          animation: glow 30s linear infinite;
-        }
-
-        &::after {
-          mask: linear-gradient(
-            90deg,
-            transparent,
-            white 10%,
-            white 90%,
-            transparent
-          );
-        }
-
-        &::before {
-          opacity: 0.6;
-          filter: blur(2rem);
-        }
-
-        // wrapper for line
-        span {
-          position: relative;
-
-          width: 63rem;
-          height: 30rem;
-
-          display: flex;
-          justify-content: center;
-
-          overflow: hidden;
-
-          .line {
-            position: absolute;
-
-            transform: translateY(-4rem);
-          }
-        }
-      }
-    }
   }
 
   .section_2_wrapper {
@@ -193,17 +94,5 @@
     h3 {
       grid-column: 2/3;
     }
-  }
-}
-
-@keyframes glow {
-  0% {
-    background-position: 0 0;
-  }
-  50% {
-    background-position: 400% 0;
-  }
-  100% {
-    background-position: 0 0;
   }
 }

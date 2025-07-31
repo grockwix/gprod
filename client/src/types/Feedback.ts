@@ -1,3 +1,5 @@
+import type { ChangeEvent } from 'react'
+
 type Tdata = {
   name: string
   email: string
@@ -27,6 +29,9 @@ type TInputField = {
   label: string
   placeholder: string
   data_valid: TValidResult | false
+  data: string
+  setdata: React.Dispatch<React.SetStateAction<Tdata>>
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 }
 
 type TValidData = {

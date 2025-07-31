@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
-import { SvgCheck, SvgError, SvgMail, SvgWarning } from './Icons'
-import { config } from '../config/feedback.config'
+import { SvgCheck, SvgError, SvgMail, SvgWarning, SvgClearField } from './Icons'
+import { config } from '../config/Feedback.config'
 import axios, { isAxiosError } from 'axios'
 import type { FC, FormEvent, ChangeEvent } from 'react'
 import type {
@@ -62,10 +62,12 @@ function Feedback() {
     }
   }, [isResend])
 
-  function onChangeHandler(e: ChangeEvent<HTMLFormElement>) {
+  function onChangeHandler(
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
     const name = e.target.name
     const value = e.target.value
-    setdata(res => ({ ...res, [name]: value }))
+    setdata(prev => ({ ...prev, [name]: value }))
   }
 
   async function onSubmitHandler(e: FormEvent<HTMLFormElement>) {
@@ -95,18 +97,16 @@ function Feedback() {
   }
 
   return (
-    <form
-      className='feedback'
-      autoComplete='off'
-      onChange={onChangeHandler}
-      onSubmit={onSubmitHandler}
-    >
+    <form className='feedback' autoComplete='off' onSubmit={onSubmitHandler}>
       <InputField
         name='name'
         type='text'
         label='Имя'
         placeholder='Введите имя'
         data_valid={!isValid && validData.name}
+        data={data.name}
+        setdata={setdata}
+        onChange={onChangeHandler}
       />
       <InputField
         name='email'
@@ -114,6 +114,9 @@ function Feedback() {
         label='Почта'
         placeholder='Пример: example@mail.ru'
         data_valid={!isValid && validData.email}
+        data={data.email}
+        setdata={setdata}
+        onChange={onChangeHandler}
       />
       <InputField
         name='msg'
@@ -121,6 +124,9 @@ function Feedback() {
         label='Сообщение'
         placeholder='Укажите подробности'
         data_valid={!isValid && validData.msg}
+        data={data.msg}
+        setdata={setdata}
+        onChange={onChangeHandler}
       />
       <span className='line-split'></span>
       <Notification notif={notif} timer={timer} />
@@ -197,6 +203,9 @@ const InputField: FC<TInputField> = ({
   label,
   placeholder,
   data_valid,
+  data,
+  setdata,
+  onChange,
 }) => {
   const isError = data_valid && !data_valid.value
   const description = data_valid && data_valid.description
@@ -219,9 +228,15 @@ const InputField: FC<TInputField> = ({
 
     autoresize.addEventListener('input', AutoResizeHandler)
     return () => {
-      autoresize.addEventListener('input', AutoResizeHandler)
+      autoresize.removeEventListener('input', AutoResizeHandler)
     }
   }, [])
+
+  // Очистка поля
+  function onClickHandler() {
+    const value = ''
+    setdata(prev => ({ ...prev, [name]: value }))
+  }
 
   if (name === 'msg') {
     swap_input = (
@@ -230,6 +245,8 @@ const InputField: FC<TInputField> = ({
         className={`fieldarea ${isError && 'error'}`}
         name={name}
         placeholder={placeholder}
+        value={data}
+        onChange={onChange}
         ref={refField}
         rows={1}
       />
@@ -242,6 +259,8 @@ const InputField: FC<TInputField> = ({
         name={name}
         type={type}
         placeholder={placeholder}
+        value={data}
+        onChange={onChange}
       />
     )
   }
@@ -252,7 +271,14 @@ const InputField: FC<TInputField> = ({
         <label className='labelfield' htmlFor={name}>
           {label}
         </label>
-        {swap_input}
+        <div className='fieldcontainer'>
+          {swap_input}
+          {data !== '' && (
+            <button className='btnclear' type='button' onClick={onClickHandler}>
+              <SvgClearField className='iconclear' />
+            </button>
+          )}
+        </div>
         <p className={`isvaild ${isError && 'view'}`}>{description}</p>
       </div>
     </>
@@ -264,7 +290,7 @@ const InputField: FC<TInputField> = ({
 function ValidField(data: Tdata): TValidData {
   const valids = config.valids
   const patterns = config.patterns
-  const keys_data: string[] = Object.keys(data)
+  const keys_data = Object.keys(data)
 
   let count_valid = 0
   const validData: TValidData = {

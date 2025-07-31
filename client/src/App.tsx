@@ -1,7 +1,9 @@
 import { ProgressBar } from './components/ProgressBar'
+import { Welcome } from './components/Welcome.tsx'
 import { WidthScroll } from './components/WidthScroll.tsx'
 import { WorksExample } from './components/WorksExample.tsx'
 import { Feedback } from './components/Feedback.tsx'
+import { LinksInFooter } from './components/LinksInFooter.tsx'
 
 function Header() {
   return (
@@ -9,7 +11,7 @@ function Header() {
       <header>
         <div className='hdr_1'>
           <a href='/'>
-            <img className='logo' src='icons/Logo.svg' />
+            <img className='logo' src='assets/icons/Logo.svg' />
           </a>
         </div>
         <div className='hdr_2'>
@@ -30,18 +32,7 @@ function Main_sec() {
   return (
     <div className='main_section'>
       <div className='section_1'>
-        <h1>
-          WEB-Development <span>разработка сайтов</span>
-        </h1>
-        <div className='welcome'>
-          <img className='rub' src='assets/section_1/RUB.png' />
-          <div className='canvas'>
-            {/* wrapper for line */}
-            <span>
-              <img className='line' src='assets/section_1/Line.png' />
-            </span>
-          </div>
-        </div>
+        <Welcome />
       </div>
       <div className='section_2_wrapper'>
         <div className='section_2'>
@@ -73,24 +64,12 @@ function Footer() {
   return (
     <footer id='About_us'>
       <div>
-        <a href='http://localhost:5173'>
-          <img src='./icons/Gprod.svg' />
+        <a href='/'>
+          <img src='assets/icons/Gprod.svg' />
         </a>
         <h6>Copyright © 2025 Gprod</h6>
       </div>
-      <nav>
-        <h4>Ссылки</h4>
-        <a href='https://vk.com/geditpro' target='_blank'>
-          Вконтакте
-        </a>
-        <a href='https://t.me/ever4night' target='_blank'>
-          Телеграм
-        </a>
-        <a href='https://vimeo.com/grockwix' target='_blank'>
-          Портфолио
-        </a>
-        <h5>gprodsofcomm@gmail.com</h5>
-      </nav>
+      <LinksInFooter />
     </footer>
   )
 }

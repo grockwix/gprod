@@ -160,13 +160,15 @@
   .fieldwrap {
     grid-column: 1/5;
 
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-
-    // border: 1px solid white;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(3, auto);
+    justify-items: start;
+    align-items: center;
 
     .labelfield {
+      grid-column: 1/3;
+
       margin: {
         left: 2rem;
         right: 2rem;
@@ -181,63 +183,93 @@
 
       color: $text-col-lght;
     }
+    .fieldcontainer {
+      position: relative;
 
-    .field {
-      border-radius: 2rem;
+      .field {
+        border-radius: 2rem;
 
-      border: none;
-    }
-
-    .fieldarea {
-      max-height: calc(4rem * 6);
-
-      border-radius: 1rem;
-
-      scrollbar-width: none;
-      resize: none;
-      border: none;
-    }
-
-    // Общие свойства полей
-    .field,
-    .fieldarea {
-      padding: {
-        left: 2rem;
-        right: 2rem;
-        top: 1rem;
-        bottom: 1rem;
+        border: none;
       }
 
-      width: $field-w;
-      height: auto;
+      .fieldarea {
+        max-height: calc(4rem * 6);
 
-      font: {
-        size: 1.2rem;
-        weight: 500;
+        border-radius: 1rem;
+
+        scrollbar-width: none;
+        resize: none;
+        border: none;
       }
 
-      outline-offset: -1px;
+      // Общие свойства полей
+      .field,
+      .fieldarea {
+        padding: {
+          left: 2rem;
+          right: 4rem;
+          top: 1rem;
+          bottom: 1rem;
+        }
 
-      color: $text-col-drk;
-      background-color: $fb-field-bg-col;
+        width: $field-w;
+        height: auto;
 
-      &.error {
-        outline: $fb-field-border $isvalid-col;
+        font: {
+          size: 1.2rem;
+          weight: 500;
+        }
+
+        outline-offset: -1px;
+
+        color: $text-col-drk;
+        background-color: $fb-field-bg-col;
+
+        &.error {
+          outline: $fb-field-border $isvalid-col;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &:focus {
+          cursor: text;
+          outline: $fb-field-border $fb-field-focus-col;
+        }
       }
 
-      &:hover {
-        cursor: pointer;
-      }
+      .btnclear {
+        position: absolute;
 
-      &:focus {
-        cursor: text;
-        outline: $fb-field-border $fb-field-focus-col;
+        top: 0.5rem;
+        right: 1rem;
+
+        padding: 0.5rem;
+
+        width: 2.5rem;
+        height: 2.5rem;
+
+        border-radius: 50%;
+        border: none;
+
+        background-color: $fb-field-btnclear-col;
+
+        &:hover {
+          background-color: $fb-field-btnclear-hover;
+        }
+
+        .iconclear {
+          fill: $fb-field-iconclear-col;
+        }
       }
     }
 
     // Сообщения об ошибке
     .isvaild,
     .isvaild.view {
+      grid-column: 1/3;
+
       margin: {
         left: 2rem;
         right: 1rem;

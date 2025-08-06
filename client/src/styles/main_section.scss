@@ -4,6 +4,35 @@
 @use 'WorksExample';
 @use 'feedback';
 
+@mixin section_glow {
+  &::before,
+  &::after {
+    position: absolute;
+    z-index: -1;
+
+    content: '';
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+
+    padding: 1px;
+
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      $lines 50%,
+      transparent
+    );
+  }
+
+  &::before {
+    filter: blur(2rem);
+    opacity: 0.2;
+  }
+}
+
 .main_section {
   display: flex;
   flex-direction: column;
@@ -23,39 +52,14 @@
     background-color: $sec-1;
   }
 
-  .section_2_wrapper {
+  .section_2_wrap {
     position: relative;
     z-index: 3;
 
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      z-index: -1;
-
-      height: 100%;
-      width: 100%;
-      top: 50%;
-      left: 50%;
-
-      translate: -50% -50%;
-
-      padding: 1px;
-
-      background-image: linear-gradient(
-        90deg,
-        transparent,
-        $lines 50%,
-        transparent
-      );
-    }
-
-    &::before {
-      filter: blur(2rem);
-      opacity: 0.2;
-    }
+    @include section_glow;
 
     .section_2 {
+      padding: 5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -78,21 +82,25 @@
     background-color: $sec-3;
   }
 
-  .section_4 {
+  .section_4_wrap {
     position: relative;
-
-    padding: 5rem;
     z-index: 4;
 
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    grid-template-rows: repeat(2, auto);
-    justify-items: center;
+    .section_4 {
+      padding: 5rem;
 
-    background-color: $sec-4;
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      grid-template-rows: repeat(2, auto);
+      justify-items: center;
 
-    h3 {
-      grid-column: 2/3;
+      background-color: $sec-4;
+
+      h3 {
+        grid-column: 2/3;
+      }
+
+      @include section_glow;
     }
   }
 }

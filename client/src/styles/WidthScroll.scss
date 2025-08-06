@@ -1,10 +1,6 @@
 @use 'data' as *;
 
 .WidthScroll {
-  padding: {
-    top: 1rem;
-    bottom: 1rem;
-  }
   max-width: 80vw;
 
   display: flex;
@@ -19,11 +15,12 @@
     transparent
   );
 
-  // outline: $lines-second;
-
   .scroll_in {
-    margin: 0;
-    padding: 0;
+    margin: {
+      top: 1rem;
+      bottom: 1rem;
+    }
+
     display: flex;
     flex-direction: row;
     gap: 0 1rem;
@@ -54,12 +51,13 @@
 
       overflow: hidden;
 
-      background-color: $li-color;
-
       transition-duration: $time-li;
 
-      border: {
-        radius: 15px;
+      border: 1px solid $li-color;
+      border-radius: 1rem;
+
+      img {
+        max-width: 12rem;
       }
 
       &:hover {

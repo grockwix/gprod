@@ -15,11 +15,10 @@ function Header() {
           </a>
         </div>
         <div className='hdr_2'>
-          <input type='search' placeholder='Поиск' />
           <nav className='menu_bar'>
-            <a href='#Home'>Главное</a>
-            <a href='#Examples'>Примеры</a>
-            <a href='#About_us'>О нас</a>
+            <a href='#Home'>Главная</a>
+            <a href='#Examples'>Работы</a>
+            <a href='#Feedback'>Обратная связь</a>
           </nav>
         </div>
       </header>
@@ -34,7 +33,7 @@ function Main_sec() {
       <div className='section_1'>
         <Welcome />
       </div>
-      <div className='section_2_wrapper'>
+      <div className='section_2_wrap'>
         <div className='section_2'>
           <h2>Бренды для примера</h2>
           <WidthScroll />
@@ -44,9 +43,11 @@ function Main_sec() {
       <div id='Examples' className='section_3'>
         <WorksExample />
       </div>
-      <div id='Feedback' className='section_4'>
-        <h3>Обратная связь</h3>
-        <Feedback />
+      <div className='section_4_wrap'>
+        <div id='Feedback' className='section_4'>
+          <h3>Обратная связь</h3>
+          <Feedback />
+        </div>
       </div>
     </div>
   )
@@ -62,7 +63,7 @@ function Main() {
 
 function Footer() {
   return (
-    <footer id='About_us'>
+    <footer>
       <div>
         <a href='/'>
           <img src='assets/icons/Gprod.svg' />

@@ -1,7 +1,7 @@
 // main
-$main-bg-col: rgb(20, 20, 20) !default;
-$header-col: hsl(0, 0%, 16%) !default;
-$head-elem_col: rgb(230, 230, 230);
+$main-bg-col: hsl(0, 0%, 8%) !default;
+$header-col: hsla(0, 0%, 16%, 0.5) !default;
+$head-elem_col: hsl(0, 0%, 90%);
 $li-color: hsl(0, 0%, 16%);
 $lines: hsl(40, 100%, 85%) !default;
 $placeholder: hsl(0, 0%, 50%) !default;
@@ -10,14 +10,13 @@ $text-col-drk: hsl(0, 0%, 15%) !default;
 
 // borders
 $bord-rad: 15px;
-$bord-elem: 20px;
 
 // button
 $btn-sndmail-col: hsl(45, 100%, 55%);
 $btn-sndmail-hover: hsl(45, 100%, 45%);
 $btn-sndmail-disabled: hsl(0, 0%, 40%);
-$btn-contact-col: hsl(13, 100%, 50%);
-$btn-contact-hover: hsl(13, 100%, 45%);
+$btn-contact-col: hsl(78, 100%, 50%);
+$btn-contact-hover: hsl(78, 100%, 40%);
 
 // canvas
 $canvas-col: linear-gradient(
@@ -80,10 +79,10 @@ $lines-main: 1rem solid red;
 $lines-second: 0.3rem solid rgb(0, 255, 213);
 
 // sections
-$sec-1: rgb(25, 25, 25) !default;
-$sec-2: rgb(35, 35, 35) !default;
-$sec-3: rgb(20, 20, 20) !default;
-$sec-4: rgb(30, 30, 30) !default;
+$sec-1: $main-bg-col;
+$sec-2: hsl(0, 0%, 12%) !default;
+$sec-3: hsl(0, 0%, 5%) !default;
+$sec-4: hsl(0, 0%, 12%) !default;
 
 // transitions
 $time-nav-menu: 500ms;

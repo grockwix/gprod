@@ -4,18 +4,67 @@
 .StickHeader {
   top: 0px;
   position: sticky;
-  z-index: 5;
+  z-index: 10;
 
   header {
+    padding: {
+      left: 5%;
+      right: 5%;
+    }
+
+    height: 5rem;
+
     display: flex;
     flex-direction: row;
-    align-items: center;
-
-    height: 80px;
-    padding-left: 5%;
-    padding-right: 5%;
 
     background-color: $header-col;
+    backdrop-filter: blur(1rem);
+  }
+
+  .hdr_2 {
+    flex-grow: 2;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 0 1rem;
+
+    .menu_bar {
+      display: flex;
+      align-items: center;
+      gap: 0rem 1rem;
+
+      a {
+        padding: {
+          left: 2rem;
+          right: 2rem;
+          top: 0.8rem;
+          bottom: 0.8rem;
+        }
+
+        display: flex;
+
+        white-space: nowrap;
+
+        font: {
+          family: $fnt-Int;
+          weight: 600;
+          size: 1rem;
+        }
+
+        border-radius: 2rem;
+
+        color: $text-col-lght;
+        background-color: transparent;
+
+        transition-duration: $time-nav-menu;
+
+        &:hover {
+          color: $text-col-drk;
+          background-color: $head-elem_col;
+        }
+      }
+    }
   }
 
   .progressbar_fill {
@@ -30,73 +79,5 @@
       border-radius: 0 1rem 1rem 0;
       background: $progressbar-col;
     }
-  }
-}
-
-.hdr_2 {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  flex-grow: 2;
-  gap: 0 1rem;
-
-  .menu_bar {
-    height: 2.5rem;
-    width: 25rem;
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-
-    // overflow: hidden;
-
-    border-radius: $bord-elem;
-    // background-color: $head-elem_col;
-
-    a {
-      height: 2.5rem;
-      width: 7rem;
-      border-radius: $bord-elem;
-      z-index: 1;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      font-family: 'Inter';
-      font-weight: 600;
-      font-size: 1rem;
-
-      color: $text-col-lght;
-
-      transition-duration: $time-nav-menu;
-
-      &:hover {
-        background-color: $head-elem_col;
-        color: $text-col-drk;
-      }
-    }
-  }
-
-  input[type='search'] {
-    width: 15rem;
-    height: 2.5rem;
-
-    padding: {
-      left: 2rem;
-      right: 1rem;
-    }
-
-    border-radius: 20px 20px 0 20px;
-
-    font-family: 'Inter';
-    font-size: 1rem;
-
-    border: none;
-    outline: none;
-
-    background-color: $head-elem_col;
-    color: black;
   }
 }

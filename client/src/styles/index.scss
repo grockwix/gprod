@@ -34,13 +34,17 @@ main {
   display: flex;
   flex-direction: row;
 
-  // background-color: $main-bg-col;
-  // outline: $lines-main;
+  overflow: hidden;
 }
 
 footer {
+  padding: {
+    top: 2rem;
+    bottom: 2rem;
+  }
+  z-index: 10;
+
   min-height: 10rem;
-  padding: 2rem;
 
   display: flex;
   flex-direction: row;

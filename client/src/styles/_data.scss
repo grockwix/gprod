@@ -1,6 +1,6 @@
 // main
 $main-bg-col: hsl(0, 0%, 8%) !default;
-$header-col: hsla(0, 0%, 16%, 0.5) !default;
+$header-col: hsla(0, 0%, 15%, 0.8) !default;
 $header-menu-elem: hsl(0, 0%, 90%) !default;
 $footer-col: hsl(0, 0%, 10%) !default;
 $li-color: hsl(0, 0%, 16%);
@@ -51,7 +51,9 @@ $fb-field-border-col: hsl(0, 0%, 80%);
 $fb-field-focus-col: hsl(45, 100%, 60%);
 $fb-field-btnclear-col: transparent;
 $fb-field-btnclear-hover: hsla(0, 0%, 15%, 0.1);
+$fb-field-btnclear-active: hsla(0, 0%, 15%, 0.3);
 $fb-field-iconclear-col: $placeholder;
+$fb-field-iconclear-active: hsl(0, 0%, 85%);
 $fb-notif-bg-succ: hsl(90, 100%, 80%);
 $fb-notif-col-succ: hsl(90, 100%, 35%);
 $fb-notif-bg-wait: hsl(45, 100%, 80%);
@@ -72,8 +74,12 @@ $ref-und-lines: hsl(80, 100%, 60%);
 $text-ref: rgb(150, 150, 150);
 
 // progressbar
-$progressbar-col: linear-gradient(90deg, #ffa500, #ffd700) !default;
-$progressbar-fill: rgba(120, 120, 120, 0.3) !default;
+$progressbar-col: linear-gradient(
+  90deg,
+  hsl(40, 100%, 50%),
+  hsl(50, 100%, 70%)
+) !default;
+$progressbar-fill: hsla(0, 0%, 20%, 0.8) !default;
 
 // outlines
 $lines-main: 1rem solid red;
@@ -89,6 +95,7 @@ $sec-4: hsl(0, 0%, 12%) !default;
 $time-nav-menu: 500ms;
 $time-logo: 500ms;
 $time-li: 300ms;
+$time-hover: 300ms;
 $time-ref: 300ms;
 $time-isvalid: 300ms;
 $time-btn: 300ms;

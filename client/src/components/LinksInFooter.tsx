@@ -22,7 +22,7 @@ function LinksInFooter() {
     <nav>
       <h4>Ссылки</h4>
       {links.map(({ name, href, icon }) => (
-        <Link name={name} href={href} icon={icon} />
+        <Link key={name} name={name} href={href} icon={icon} />
       ))}
       <h5>gprodsofcomm@gmail.com</h5>
     </nav>

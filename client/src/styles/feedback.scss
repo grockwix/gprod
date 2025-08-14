@@ -124,6 +124,7 @@
       justify-items: stretch;
       align-items: center;
 
+      color: $text-col-lght;
       p {
         width: 5rem;
 
@@ -136,9 +137,10 @@
       }
 
       .mail {
-        fill: $text-col-lght;
         width: 2rem;
         height: 2rem;
+
+        fill: $text-col-lght;
       }
 
       .loader_out {
@@ -152,6 +154,7 @@
     }
 
     &:disabled {
+      color: $text-col-lght;
       background-color: $btn-sndmail-disabled;
     }
   }
@@ -257,6 +260,13 @@
 
         &:hover {
           background-color: $fb-field-btnclear-hover;
+        }
+
+        &:active {
+          background-color: $fb-field-btnclear-active;
+          .iconclear {
+            fill: $fb-field-iconclear-active;
+          }
         }
 
         .iconclear {

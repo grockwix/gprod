@@ -216,7 +216,8 @@ const InputField: FC<TInputField> = ({
   // Адаптивный размер поля msg
   useEffect(() => {
     const autoresize = refField.current
-    if (!autoresize) return
+
+    if (!autoresize) return // Проверка на наличие элемента
 
     function AutoResizeHandler() {
       if (!autoresize) return
@@ -234,6 +235,10 @@ const InputField: FC<TInputField> = ({
 
   // Очистка поля
   function onClickHandler() {
+    // Возврат поля "msg" в исходное состояние
+    const autoresize = refField.current
+    if (autoresize) autoresize.style.height = 'auto'
+
     const value = ''
     setdata(prev => ({ ...prev, [name]: value }))
   }

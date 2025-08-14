@@ -4,6 +4,7 @@ import { WidthScroll } from './components/WidthScroll.tsx'
 import { WorksExample } from './components/WorksExample.tsx'
 import { Feedback } from './components/Feedback.tsx'
 import { LinksInFooter } from './components/LinksInFooter.tsx'
+import { config } from './config/WidthScroll.config.ts'
 
 function Header() {
   return (
@@ -36,8 +37,8 @@ function Main_sec() {
       <div className='section_2_wrap'>
         <div className='section_2'>
           <h2>Бренды для примера</h2>
-          <WidthScroll />
-          <WidthScroll direction='right' />
+          <WidthScroll data={config.scroll_1} />
+          <WidthScroll data={config.scroll_1} direction='right' />
         </div>
       </div>
       <div id='Examples' className='section_3'>

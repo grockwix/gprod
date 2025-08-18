@@ -6,6 +6,12 @@ $footer-col: hsl(0, 0%, 10%) !default;
 $li-color: hsl(0, 0%, 16%);
 $lines: hsl(40, 100%, 85%) !default;
 $placeholder: hsl(0, 0%, 50%) !default;
+$skeleton: linear-gradient(
+  90deg,
+  hsl(0, 0%, 30%),
+  hsl(0, 0%, 50%),
+  hsl(0, 0%, 30%)
+) !default;
 $text-col-lght: hsl(0, 0%, 94%) !default;
 $text-col-drk: hsl(0, 0%, 15%) !default;
 

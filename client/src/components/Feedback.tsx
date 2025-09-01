@@ -11,13 +11,15 @@ import type {
   TValidData,
   TSendData,
 } from '../types/Feedback'
+import { useDispatch, useSelector } from 'react-redux'
+import { timerTime, timerResend, timerReset } from '../Redux/Slices'
+import type { RootState } from '../Redux/store'
 
 const URL_SERVER = import.meta.env.VITE_URL_SERVER
 
 function Feedback() {
   const initdata = { name: '', email: '', msg: '' }
   const initnotif = { status: '', msg: '' }
-  const inittimer = 30
   const delay = 30000
 
   const [data, setdata] = useState<Tdata>(initdata)
@@ -25,8 +27,10 @@ function Feedback() {
   const [isLoading, setisLoading] = useState(false)
 
   const [notif, setnotif] = useState(initnotif)
-  const [timer, settimer] = useState<number>(inittimer)
-  const [isResend, setisResend] = useState(true)
+  const timer = useSelector((state: RootState) => state.timer.time)
+  const Resend = useSelector((state: RootState) => state.timer.isResend)
+  const dispatch = useDispatch()
+
   const refInter = useRef<number>(null)
   const refTimer = useRef<number>(null)
 
@@ -34,16 +38,15 @@ function Feedback() {
 
   // Таймер отправки
   useEffect(() => {
-    if (isResend) return
+    if (Resend) return
 
     const Initial = () => {
-      settimer(inittimer)
       setnotif(initnotif)
-      setisResend(true)
+      dispatch(timerReset())
     }
 
     refInter.current = setInterval(() => {
-      settimer(s => s - 1)
+      dispatch(timerTime())
     }, 1000)
 
     refTimer.current = setTimeout(() => {
@@ -60,7 +63,7 @@ function Feedback() {
         Initial()
       }
     }
-  }, [isResend])
+  }, [Resend])
 
   function onChangeHandler(
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -74,7 +77,7 @@ function Feedback() {
     e.preventDefault()
 
     // Проверка на повторную отправку
-    if (!isResend) {
+    if (!Resend) {
       setnotif({ status: 'wait', msg: 'Для следующей отправки осталось' })
       return
     }
@@ -93,7 +96,7 @@ function Feedback() {
     }
 
     // Запуск таймера повторной отправки
-    setisResend(false)
+    dispatch(timerResend(false))
   }
 
   return (

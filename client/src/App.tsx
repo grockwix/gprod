@@ -38,19 +38,19 @@ function Header() {
 function Main_sec() {
   // Для динамической загрузки секций
   const { ref: ref1, inView: inView1 } = useInView({
-    threshold: 0.5,
+    threshold: 0.2,
     triggerOnce: true,
   })
   const { ref: ref2, inView: inView2 } = useInView({
-    threshold: 0.5,
+    threshold: 0.2,
     triggerOnce: true,
   })
   const { ref: ref3, inView: inView3 } = useInView({
-    threshold: 0.5,
+    threshold: 0.2,
     triggerOnce: true,
   })
   const { ref: ref4, inView: inView4 } = useInView({
-    threshold: 0.5,
+    threshold: 0.2,
     triggerOnce: true,
   })
 

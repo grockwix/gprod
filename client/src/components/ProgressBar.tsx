@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { progress } from '../Redux/Slices'
 import type { FC } from 'react'
+import type { RootState } from '../Redux/store'
 
 // Прогресс прокрутки страницы (прогресс сохраняется в LocalStorage)
 const ProgressBar: FC = () => {
-  const [progress, setprogress] = useState<number>(() => {
-    const LastProgress = localStorage.getItem('ProgressBar')
-    return LastProgress ? JSON.parse(LastProgress) : 0
-  })
+  const progressBar = useSelector((state: RootState) => state.progressbar.value)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     function scrollHandler() {
@@ -16,7 +17,7 @@ const ProgressBar: FC = () => {
 
       const current = (PosY / (TotalH - innerH)) * 100
 
-      setprogress(current)
+      dispatch(progress(current))
       localStorage.setItem('ProgressBar', JSON.stringify(current))
     }
 
@@ -28,7 +29,7 @@ const ProgressBar: FC = () => {
 
   return (
     <div className='progressbar_fill'>
-      <div style={{ width: `${progress}%` }} className='progressbar'></div>
+      <div style={{ width: `${progressBar}%` }} className='progressbar'></div>
     </div>
   )
 }
